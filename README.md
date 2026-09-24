@@ -1,9 +1,9 @@
 # FlyNow Airlines Reservation System
 
-A complete MERN stack (without React, using Vanilla JS for UI) web application for booking flights, checking in, and managing reservations with a responsive glassmorphism UI.
+A complete MERN stack  web application for booking flights, checking in, and managing reservations with a responsive glassmorphism UI.
 
 ## Tech Stack
-- **Frontend**: HTML5, CSS3 (Modern Glassmorphism, animations, grid/flexbox), Vanilla JavaScript
+- **Frontend**: HTML5, CSS3 (Modern Glassmorphism, animations, grid/flexbox), JavaScript
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (Mongoose)
 - **Features**: JWT Authentication, dynamic seasonal pricing, simulated payment processing, QR Code boarding pass generation, page transition animations.
