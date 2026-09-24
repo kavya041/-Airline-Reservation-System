@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyNow Airlines | My Bookings</title>
+    <meta name="description" content="View, pay, and manage your FlyNow Airlines flight bookings.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="page-transition" class="transition-overlay">
+        <div class="airplane-icon">✈️</div>
+    </div>
+
+    <nav class="navbar relative-nav">
+        <div class="logo">FlyNow ✈️</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="booking.html" class="nav-link active">My Bookings</a></li>
+            <li><a href="checkin.html" class="nav-link">Check-In</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li id="auth-nav"><a href="#" id="logout-btn" class="nav-btn logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container main-content">
+        <h1 class="page-title">My Bookings</h1>
+
+        <div id="bookings-container" class="bookings-list">
+            <div class="loader"></div>
+        </div>
+
+        <!-- Destination Popup (shown on new booking) -->
+        <div id="destination-popup" class="modal hidden">
+            <div class="modal-content glassmorphism">
+                <h3>🎉 Booking Successful!</h3>
+                <p>You're going to <span id="dest-city" class="highlight"></span>!</p>
+                <div class="dest-info" id="dest-info-container"></div>
+                <div id="notifications-sim">
+                    <small><i>📱 SMS & WhatsApp Notification sent to your registered number</i></small>
+                </div>
+                <button class="btn-primary mt-3" id="close-modal-btn">Awesome!</button>
+            </div>
+        </div>
+
+        <!-- Passenger Details Modal (shown before payment) -->
+        <div id="passenger-modal" class="modal hidden">
+            <div class="modal-content glassmorphism" style="max-width:600px;">
+                <h3>👤 Passenger Details</h3>
+                <p>Booking: <span id="pass-booking-ref"></span> | Amount: ₹<span id="pass-amount"></span></p>
+                <div class="form-row mb-3">
+                    <div class="input-group">
+                        <label>Number of Passengers</label>
+                        <input id="num-passengers" type="number" value="1" min="1" max="10">
+                    </div>
+                    <div class="input-group">
+                        <label>Class</label>
+                        <select id="flight-class">
+                            <option value="Economy">Economy</option>
+                            <option value="Business">Business</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="passenger-forms-container"></div>
+                <button id="confirm-passengers-btn" class="btn-success mt-3 w-100">Book Ticket</button>
+                <button id="cancel-passenger-btn" class="btn-danger mt-2 w-100">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Payment Modal -->
+        <div id="payment-modal" class="modal hidden">
+            <div class="modal-content glassmorphism">
+                <h3>💳 Complete Payment</h3>
+                <p>Booking ID: <strong><span id="pay-booking-id"></span></strong></p>
+                <p>Amount: <strong>₹<span id="pay-amount"></span></strong></p>
+
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="pay-method" value="netbanking" checked>
+                        <span class="pay-icon">🏦</span> Net Banking
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="pay-method" value="creditcard">
+                        <span class="pay-icon">💳</span> Credit Card
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="pay-method" value="debitcard">
+                        <span class="pay-icon">🏧</span> Debit Card
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="pay-method" value="upi">
+                        <span class="pay-icon">📱</span> UPI
+                    </label>
+                </div>
+
+                <!-- Dynamic payment fields -->
+                <div id="pay-fields" class="pay-fields"></div>
+
+                <button id="simulate-payment-btn" class="btn-success mt-3 w-100">🔒 Pay Securely</button>
+                <button id="cancel-payment-btn" class="btn-danger mt-2 w-100">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Cancellation Confirmation Modal -->
+        <div id="cancel-modal" class="modal hidden">
+            <div class="modal-content glassmorphism">
+                <h3>❌ Cancel Booking</h3>
+                <div id="cancel-details"></div>
+                <div class="refund-info">
+                    <span class="refund-badge">💰 80% Refund Applicable</span>
+                    <p id="refund-calc"></p>
+                </div>
+                <button id="confirm-cancel-btn" class="btn-danger w-100 mt-3">Yes, Cancel Booking</button>
+                <button id="close-cancel-btn" class="btn-secondary w-100 mt-2">Keep My Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 FlyNow Airlines. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

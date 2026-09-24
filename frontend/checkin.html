@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyNow Airlines | Online Check-In</title>
+    <meta name="description" content="Check-in online, select seats, and get your digital boarding pass.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="page-transition" class="transition-overlay">
+        <div class="airplane-icon">✈️</div>
+    </div>
+
+    <nav class="navbar relative-nav">
+        <div class="logo">FlyNow ✈️</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="booking.html" class="nav-link">My Bookings</a></li>
+            <li><a href="checkin.html" class="nav-link active">Check-In</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li id="auth-nav"><a href="#" id="logout-btn" class="nav-btn logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container main-content">
+        <h1 class="page-title">Online Check-In</h1>
+
+        <!-- Check-in Form - list of eligible bookings -->
+        <div id="checkin-form-container">
+            <p class="section-subtitle">Select a booking below to check-in and get your boarding pass.</p>
+            <div id="paid-bookings-list" class="bookings-list">
+                <div class="loader"></div>
+            </div>
+        </div>
+
+        <!-- Seat Selection Section (shown when a booking is selected) -->
+        <div id="seat-selection-container" class="hidden">
+            <h2>🪑 Select Your Seat</h2>
+            <p id="seat-selection-info" class="section-subtitle"></p>
+            <div class="seat-legend">
+                <span class="legend-item"><span class="seat-demo available"></span> Available</span>
+                <span class="legend-item"><span class="seat-demo booked"></span> Booked</span>
+                <span class="legend-item"><span class="seat-demo selected"></span> Your Selection</span>
+            </div>
+            <div id="seat-map" class="seat-map">
+                <!-- Dynamically populated by JS -->
+            </div>
+            <div class="selected-seats-info">
+                <p>Selected: <strong id="selected-seat-display">None</strong></p>
+            </div>
+            
+            <div class="id-verification-section glassmorphism mt-3 p-3">
+                <h4>🛡️ ID Verification</h4>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Booking ID</label>
+                        <input type="text" id="checkin-booking-id" readonly style="background: rgba(255,255,255,0.05); color: var(--primary);">
+                    </div>
+                    <div class="input-group">
+                        <label>ID Type</label>
+                        <select id="checkin-id-type">
+                            <option value="Aadhaar">Aadhaar</option>
+                            <option value="Passport">Passport</option>
+                            <option value="Driving License">Driving License</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>ID Number</label>
+                        <input type="password" id="checkin-id-number" placeholder="Enter ID Number">
+                    </div>
+                </div>
+            </div>
+
+            <button id="confirm-seat-btn" class="btn-primary w-100 mt-3" disabled>Confirm Seat & Check-In</button>
+            <button id="cancel-seat-btn" class="btn-secondary w-100 mt-2">Back</button>
+        </div>
+
+        <!-- Boarding Pass Section (shown after check-in) -->
+        <div id="boarding-pass-container" class="hidden">
+            <div class="boarding-pass glassmorphism" id="boarding-pass-card">
+                <div class="bp-header">
+                    <span class="bp-airline">FlyNow ✈️</span>
+                    <span class="bp-title">BOARDING PASS</span>
+                </div>
+                <div class="bp-body">
+                    <div class="bp-route">
+                        <div class="bp-city">
+                            <span class="bp-city-code" id="bp-from-code"></span>
+                            <span class="bp-city-name" id="bp-from-name"></span>
+                        </div>
+                        <div class="bp-plane-anim">✈️</div>
+                        <div class="bp-city">
+                            <span class="bp-city-code" id="bp-to-code"></span>
+                            <span class="bp-city-name" id="bp-to-name"></span>
+                        </div>
+                    </div>
+                    <div class="bp-details-grid">
+                        <div class="bp-detail">
+                            <span class="bp-label">Passenger</span>
+                            <span class="bp-value" id="bp-passengers"></span>
+                        </div>
+                        <div class="bp-detail">
+                            <span class="bp-label">Flight</span>
+                            <span class="bp-value" id="bp-flight"></span>
+                        </div>
+                        <div class="bp-detail">
+                            <span class="bp-label">Booking Ref</span>
+                            <span class="bp-value" id="bp-ref"></span>
+                        </div>
+                        <div class="bp-detail">
+                            <span class="bp-label">Seat</span>
+                            <span class="bp-value" id="bp-seat"></span>
+                        </div>
+                        <div class="bp-detail">
+                            <span class="bp-label">Departure</span>
+                            <span class="bp-value" id="bp-departure"></span>
+                        </div>
+                        <div class="bp-detail">
+                            <span class="bp-label">Status</span>
+                            <span class="bp-value bp-status" id="bp-status-badge"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bp-footer">
+                    <div class="bp-qr-section">
+                        <img id="bp-qrcode" src="" alt="Boarding Pass QR Code" class="bp-qr">
+                        <p><small>Scan at gate</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-actions">
+                <button onclick="downloadBoardingPass()" class="btn-primary mt-3">📥 Download Boarding Pass (PDF)</button>
+                <button onclick="downloadTicket()" class="btn-secondary mt-2">🎫 Download Ticket (PDF)</button>
+                <button onclick="location.href='booking.html'" class="btn-secondary mt-2">← Back to Bookings</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 FlyNow Airlines. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

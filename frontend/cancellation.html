@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancellation & Refund — FlyNow Airlines</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div id="page-transition" class="transition-overlay"><span class="airplane-icon">✈️</span></div>
+
+    <nav class="navbar relative-nav">
+        <div class="logo">FlyNow</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="booking.html" class="nav-link active">My Bookings</a></li>
+            <li><a href="checkin.html" class="nav-link">Check-in</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li id="auth-nav"></li>
+        </ul>
+    </nav>
+
+    <div class="container main-content mt-3">
+        <div class="justify-center min-h-80vh align-center">
+            <div class="glassmorphism contact-box" style="max-width: 650px;">
+                <h2 class="text-center">Cancellation & Refund</h2>
+                <p class="text-center muted">Review your refund details before confirming cancellation.</p>
+
+                <div id="cancel-loading" class="text-center p-5">
+                    <div class="loader"></div>
+                    <p class="mt-2 text-muted">Calculating refund details...</p>
+                </div>
+
+                <div id="cancel-content" class="hidden">
+                    <div class="booking-summary glassmorphism p-3 mb-3" style="background: rgba(255,255,255,0.05);">
+                        <h4 id="c-flight" class="text-primary">Flight Name (ID)</h4>
+                        <p id="c-route" class="mb-1">Source → Destination</p>
+                        <p id="c-dep" class="muted small"></p>
+                    </div>
+
+                    <div class="refund-details mb-4">
+                        <div class="d-flex justify-between p-2">
+                            <span>Ticket Price</span>
+                            <span id="r-price" class="font-bold">₹0</span>
+                        </div>
+                        <div class="d-flex justify-between p-2 text-danger">
+                            <span>Cancellation Charges</span>
+                            <span id="r-charges" class="font-bold">-₹0</span>
+                        </div>
+                        <hr style="border: 0.5px solid var(--glass-border); margin: 0.5rem 0;">
+                        <div class="d-flex justify-between p-2" style="font-size: 1.2rem;">
+                            <span class="text-success">Total Refund Amount</span>
+                            <span id="r-total" class="text-success font-bold">₹0</span>
+                        </div>
+                    </div>
+
+                    <div class="refund-timeline glassmorphism p-3 mb-4" style="background: rgba(16,185,129,0.05); border-color: rgba(16,185,129,0.2);">
+                        <h4 class="text-success">📅 Refund Timeline</h4>
+                        <p class="small muted mt-1">Refunding amount will be credited to your original payment method within **3-5 business days**.</p>
+                    </div>
+
+                    <!-- Refund Procedure Button and Message Tab -->
+                    <div class="refund-procedure-section mb-4">
+                        <button id="refund-proc-btn" class="btn-secondary w-100">📋 View Refund Procedure & Eligibility</button>
+                        <div id="refund-details-tab" class="hidden mt-3 p-3 glassmorphism refund-message-tab">
+                            <h4 class="text-primary mb-2">Refund Policy & Eligibility</h4>
+                            <ul class="text-left small-list">
+                                <li><strong>Full Refund:</strong> If cancelled more than 48 hours before departure (minus ₹200 fee).</li>
+                                <li><strong>Partial Refund:</strong> 24-48 hours before departure (₹500 fee applies).</li>
+                                <li><strong>Last Minute:</strong> 2-24 hours before departure (₹1000 fee applies).</li>
+                                <li><strong>Non-Refundable:</strong> Less than 2 hours before departure or after flight.</li>
+                                <li><strong>Procedure:</strong> Refund is initiated automatically upon confirmation. You will receive a confirmation email and SMS once processed.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div id="eligibility-error" class="hidden text-center p-3 mb-4 text-danger glassmorphism" style="border-color: var(--danger);">
+                        <strong>Not Eligible:</strong> <span id="error-msg"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button id="confirm-cancel-page-btn" class="btn-danger w-100">Confirm Cancellation</button>
+                        <button onclick="window.location.href='booking.html'" class="btn-secondary w-100">Go Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

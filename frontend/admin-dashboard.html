@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlyNow Airlines | Admin Dashboard</title>
+    <meta name="description" content="Admin Dashboard for FlyNow Airlines - Manage flights, bookings, and users.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-body">
+    <div id="page-transition" class="transition-overlay">
+        <div class="airplane-icon">✈️</div>
+    </div>
+
+    <!-- Admin Sidebar -->
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="sidebar-logo">FlyNow ✈️<span class="admin-badge-sm">Admin</span></div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-link active" data-section="dashboard">📊 Dashboard</a>
+                <a href="#" class="sidebar-link" data-section="flights">✈️ Flights</a>
+                <a href="#" class="sidebar-link" data-section="bookings">📋 Bookings</a>
+                <a href="#" class="sidebar-link" data-section="users">👥 Users</a>
+            </nav>
+            <button class="admin-logout-btn" id="admin-logout">🚪 Logout</button>
+        </aside>
+
+        <!-- Main Admin Content -->
+        <main class="admin-main">
+            <div class="admin-topbar">
+                <h2 id="admin-section-title">Dashboard Overview</h2>
+                <span id="admin-user-display" class="admin-user-tag"></span>
+            </div>
+
+            <!-- Dashboard Section -->
+            <section id="section-dashboard" class="admin-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">✈️</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="stat-flights">-</span>
+                            <span class="stat-label">Total Flights</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="stat-bookings">-</span>
+                            <span class="stat-label">Total Bookings</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="stat-users">-</span>
+                            <span class="stat-label">Registered Users</span>
+                        </div>
+                    </div>
+                    <div class="stat-card revenue">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="stat-revenue">-</span>
+                            <span class="stat-label">Total Revenue</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-activity glassmorphism" style="margin-top:2rem;">
+                    <h3>Recent Bookings</h3>
+                    <div id="recent-bookings-table"></div>
+                </div>
+            </section>
+
+            <!-- Flights Section -->
+            <section id="section-flights" class="admin-section hidden">
+                <div class="admin-section-header">
+                    <h3>Manage Flights</h3>
+                    <button class="btn-primary" id="add-flight-btn">+ Add New Flight</button>
+                </div>
+
+                <!-- Add/Edit Flight Form -->
+                <div id="flight-form-container" class="glassmorphism hidden" style="padding:1.5rem; margin-bottom:2rem;">
+                    <h4 id="flight-form-title">Add New Flight</h4>
+                    <form id="flight-form" class="admin-form">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Flight ID</label>
+                                <input type="text" id="f-flightId" placeholder="e.g. SKY101" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Airline Name</label>
+                                <input type="text" id="f-airlineName" placeholder="e.g. FlyNow Airlines" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Source</label>
+                                <input type="text" id="f-source" placeholder="e.g. New York" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Destination</label>
+                                <input type="text" id="f-destination" placeholder="e.g. London" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Departure Time</label>
+                                <input type="datetime-local" id="f-departureTime" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Arrival Time</label>
+                                <input type="datetime-local" id="f-arrivalTime" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Base Price ($)</label>
+                                <input type="number" id="f-basePrice" placeholder="e.g. 350" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Seats Available</label>
+                                <input type="number" id="f-seatsAvailable" placeholder="e.g. 60" value="60">
+                            </div>
+                        </div>
+                        <input type="hidden" id="f-editing-id">
+                        <div style="display:flex;gap:1rem; margin-top:1rem;">
+                            <button type="submit" class="btn-success">💾 Save Flight</button>
+                            <button type="button" id="cancel-flight-form" class="btn-secondary">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="flights-table-container" class="table-container glassmorphism">
+                    <div class="loader"></div>
+                </div>
+            </section>
+
+            <!-- Bookings Section -->
+            <section id="section-bookings" class="admin-section hidden">
+                <div class="admin-section-header">
+                    <h3>All Bookings</h3>
+                </div>
+                <div id="bookings-table-container" class="table-container glassmorphism">
+                    <div class="loader"></div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="section-users" class="admin-section hidden">
+                <div class="admin-section-header">
+                    <h3>Manage Users</h3>
+                </div>
+                <div id="users-table-container" class="table-container glassmorphism">
+                    <div class="loader"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyHigh Airlines | Home</title>
+    <meta name="description"
+        content="Book your next flight with SkyHigh Airlines. Search flights, explore destinations, and travel the world.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="background-overlay"></div>
+    <div id="page-transition" class="transition-overlay">
+        <div class="airplane-icon">✈️</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">SkyHigh ✈️</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="booking.html" class="nav-link">My Bookings</a></li>
+            <li><a href="checkin.html" class="nav-link">Check-In</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+            <li id="auth-nav"><a href="login.html" class="nav-btn">Login/Register</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Let Your Dreams Take Flight</h1>
+            <p>Explore the world with seasonal discounts and premium comfort.</p>
+        </div>
+
+        <div class="search-container glassmorphism">
+            <h2>Find Your Flight</h2>
+            <form id="search-form">
+                <div class="input-group">
+                    <label>From</label>
+                    <input type="text" id="source" placeholder="e.g. New York">
+                </div>
+                <div class="input-group">
+                    <label>To</label>
+                    <input type="text" id="destination" placeholder="e.g. London">
+                </div>
+                <div class="input-group">
+                    <label>Departure Date</label>
+                    <input type="date" id="date">
+                </div>
+                <button type="submit" class="btn-primary">Search Flights ✈️</button>
+            </form>
+        </div>
+    </header>
+
+    <section class="results-section">
+        <h2>Available Flights</h2>
+        <div id="flight-results" class="flight-grid">
+            <p class="placeholder-text">Enter search details to find flights.</p>
+        </div>
+    </section>
+
+    <!-- Tourist Suggestions Section (dynamically populated by JS based on destination) -->
+    <section id="tourist-section" class="tourist-section hidden">
+        <h2>🗺️ Explore <span id="tourist-dest-name">your destination</span></h2>
+        <p class="section-subtitle">Top attractions and travel tips for your trip</p>
+        <div id="tourist-cards" class="tourist-grid"></div>
+    </section>
+
+    <!-- Default Popular Destinations (always visible) -->
+    <section class="popular-section">
+        <h2>🌟 Popular Destinations</h2>
+        <p class="section-subtitle">Discover the world's most breathtaking locations</p>
+        <div class="popular-grid">
+            <div class="popular-card" onclick="fillSearch('New York','London')">
+                <div class="popular-img">🗼</div>
+                <div class="popular-info">
+                    <h3>London</h3>
+                    <p>Big Ben, Tower Bridge, The Thames</p>
+                </div>
+            </div>
+            <div class="popular-card" onclick="fillSearch('London','Paris')">
+                <div class="popular-img">🗽</div>
+                <div class="popular-info">
+                    <h3>Paris</h3>
+                    <p>Eiffel Tower, Louvre, Montmartre</p>
+                </div>
+            </div>
+            <div class="popular-card" onclick="fillSearch('New York','Dubai')">
+                <div class="popular-img">🏙️</div>
+                <div class="popular-info">
+                    <h3>Dubai</h3>
+                    <p>Burj Khalifa, Desert Safaris, Gold Souk</p>
+                </div>
+            </div>
+            <div class="popular-card" onclick="fillSearch('London','Tokyo')">
+                <div class="popular-img">⛩️</div>
+                <div class="popular-info">
+                    <h3>Tokyo</h3>
+                    <p>Shibuya, Mount Fuji, Shinjuku</p>
+                </div>
+            </div>
+            <div class="popular-card" onclick="fillSearch('New York','Singapore')">
+                <div class="popular-img">🌴</div>
+                <div class="popular-info">
+                    <h3>Singapore</h3>
+                    <p>Marina Bay, Gardens by the Bay, Sentosa</p>
+                </div>
+            </div>
+            <div class="popular-card" onclick="fillSearch('London','Sydney')">
+                <div class="popular-img">🦘</div>
+                <div class="popular-info">
+                    <h3>Sydney</h3>
+                    <p>Opera House, Harbour Bridge, Bondi Beach</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SkyHigh Airlines. All rights reserved.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
